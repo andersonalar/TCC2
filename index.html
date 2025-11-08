@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gerenciamento de Salões de Beleza</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(122deg, #ece3ec 10.89%, #D9DFC9 90.9%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo p {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555845;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #8bc34a;
+        }
+
+        .slider {
+            margin: 40px auto;
+            width: 90%;
+            max-width: 1200px;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .slides {
+            width: 400%;
+            height: 100%;
+            display: flex;
+            animation: slide 16s infinite;
+        }
+
+        .slide {
+            width: 25%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes slide {
+            0%, 20% { margin-left: 0; }
+            25%, 45% { margin-left: -100%; }
+            50%, 70% { margin-left: -200%; }
+            75%, 95% { margin-left: -300%; }
+            100% { margin-left: 0; }
+        }
+
+        section {
+            padding: 60px 5%;
+        }
+
+        h1, h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #000;
+        }
+
+        #home {
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        #home p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        #servicos {
+            background-color: #312b2e;
+            color: #fff;
+            border-top: 5px solid #ece3ec;
+            border-bottom: 5px solid #ece3ec;
+        }
+
+        #servicos h2 {
+            color: #fff;
+        }
+
+        .eventos__lista {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .eventos__item {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .eventos__item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .eventos__item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .eventos__item h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .eventos__item h4 {
+            font-size: 18px;
+            color: #8bc34a;
+        }
+
+        #agendamentos {
+            background: linear-gradient(122deg, #ACC5A1 10.89%, #F3E778 90.9%);
+        }
+
+        form {
+            background-color: #fff;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: 500;
+            color: #000;
+            display: block;
+            margin-top: 15px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #c4c4c4;
+            border-radius: 8px;
+            font-family: "Poppins", sans-serif;
+            font-size: 14px;
+        }
+
+        input[type="submit"], input[type="reset"] {
+            background-color: #8bc34a;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #7cb342;
+        }
+
+        input[type="reset"] {
+            background-color: #f47e7e;
+        }
+
+        input[type="reset"]:hover {
+            background-color: #e86c6c;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        #contato {
+            background: linear-gradient(122deg, #ACC5A1 10.89%, #F3E778 90.9%);
+        }
+
+        .contato-info {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contato-info p {
+            font-size: 18px;
+            margin: 15px 0;
+            color: #000;
+        }
+
+        #funcionarios {
+            background: linear-gradient(122deg, #ece3ec 10.89%, #D9DFC9 90.9%);
+        }
+
+        .funcionarios__lista {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .funcionarios__item {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .funcionarios__item:hover {
+            transform: translateY(-10px);
+        }
+
+        .funcionarios__item img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .funcionarios__item h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .funcionarios__item h4 {
+            font-size: 16px;
+            color: #555845;
+            margin-bottom: 5px;
+        }
+
+        .funcionarios__item h5 {
+            font-size: 14px;
+            color: #8bc34a;
+        }
+
+        .back-to-top {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            background-color: #8bc34a;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top:hover {
+            background-color: #7cb342;
+            transform: translateY(-3px);
+        }
+
+        .section-footer {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .slider {
+                height: 300px;
+            }
+
+            h1, h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <p>Sistema de Gerenciamento de Salões de Beleza</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#servicos">SERVIÇOS</a></li>
+                <li><a href="#agendamentos">AGENDAMENTOS</a></li>
+                <li><a href="#contato">CONTATO</a></li>
+                <li><a href="#funcionarios">FUNCIONÁRIOS</a></li>
+                <li><a href="login.html">LOGIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="slider">
+            <div class="slides">
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200" alt="Salão de Beleza 1">
+                </div>
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1200" alt="Salão de Beleza 2">
+                </div>
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1200" alt="Salão de Beleza 3">
+                </div>
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?w=1200" alt="Salão de Beleza 4">
+                </div>
+            </div>
+        </div>
+
+        <section id="home">
+            <h1>Sistema de Gerenciamento de Salões de Beleza</h1>
+            <p>O sistema de gerenciamento de salões de beleza foi desenvolvido com o objetivo de otimizar o controle e a administração de serviços, clientes, agendamentos e profissionais do salão. A plataforma permite um gerenciamento prático e eficiente, integrando todas as áreas do negócio em um só lugar. Com um design moderno e intuitivo, o sistema facilita o agendamento online, o registro de atendimentos e o acompanhamento de desempenho dos colaboradores. Além disso, proporciona mais agilidade no atendimento ao cliente, contribuindo para a organização, produtividade e crescimento do salão de beleza.</p>
+            <div class="section-footer">
+                <a href="#" class="back-to-top">↑ Voltar ao Topo</a>
+            </div>
+        </section>
+
+        <section id="servicos">
+            <h2>Serviços</h2>
+            <ul class="eventos__lista">
+                <li class="eventos__item">
+                    <img src="https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=400" alt="Escovinha">
+                    <h3>Escovinha</h3>
+                    <h4>R$ 100,00</h4>
+                </li>
+                <li class="eventos__item">
+                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400" alt="Manicure">
+                    <h3>Manicure</h3>
+                    <h4>R$ 50,00</h4>
+                </li>
+                <li class="eventos__item">
+                    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400" alt="Tintura">
+                    <h3>Tintura</h3>
+                    <h4>R$ 100,00</h4>
+                </li>
+                <li class="eventos__item">
+                    <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=400" alt="Corte">
+                    <h3>Corte</h3>
+                    <h4>R$ 50,00</h4>
+                </li>
+                <li class="eventos__item">
+                    <img src="https://images.unsplash.com/photo-1620331311520-246422fd82f9?w=400" alt="Blindagem">
+                    <h3>Blindagem</h3>
+                    <h4>R$ 100,00</h4>
+                </li>
+                <li class="eventos__item">
+                    <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400" alt="Realinhamento">
+                    <h3>Realinhamento</h3>
+                    <h4>R$ 100,00</h4>
+                </li>
+                <li class="eventos__item">
+                    <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=400" alt="Tratamento">
+                    <h3>Tratamento</h3>
+                    <h4>R$ 100,00</h4>
+                </li>
+                <li class="eventos__item">
+                    <img src="https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=400" alt="Depilação">
+                    <h3>Depilação</h3>
+                    <h4>R$ 100,00</h4>
+                </li>
+                <li class="eventos__item">
+                    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=400" alt="Maquiagem">
+                    <h3>Maquiagem</h3>
+                    <h4>R$ 100,00</h4>
+                </li>
+                <li class="eventos__item">
+                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400" alt="Limpeza de Pele">
+                    <h3>Limpeza de Pele</h3>
+                    <h4>R$ 100,00</h4>
+                </li>
+            </ul>
+            <div class="section-footer">
+                <a href="#" class="back-to-top">↑ Voltar ao Topo</a>
+            </div>
+        </section>
+
+        <section id="agendamentos">
+            <h2>Agendamentos</h2>
+            <form>
+                <label>Cliente:</label>
+                <input type="text" name="nome" placeholder="Nome Completo" required>
+
+                <label>Serviço:</label>
+                <select name="servico" required>
+                    <option value="">Selecione um serviço</option>
+                    <option value="escovinha">Escovinha - R$ 100,00</option>
+                    <option value="manicure">Manicure - R$ 50,00</option>
+                    <option value="tintura">Tintura - R$ 100,00</option>
+                    <option value="corte">Corte - R$ 50,00</option>
+                    <option value="blindagem">Blindagem - R$ 100,00</option>
+                    <option value="realinhamento">Realinhamento - R$ 100,00</option>
+                    <option value="tratamento">Tratamento - R$ 100,00</option>
+                    <option value="depilacao">Depilação - R$ 100,00</option>
+                    <option value="maquiagem">Maquiagem - R$ 100,00</option>
+                    <option value="limpeza">Limpeza de Pele - R$ 100,00</option>
+                </select>
+
+                <label>Funcionário:</label>
+                <select name="funcionario" required>
+                    <option value="">Selecione um funcionário</option>
+                    <option value="maria">Maria</option>
+                    <option value="tatiana">Tatiana</option>
+                    <option value="andressa">Andressa</option>
+                    <option value="daniela">Daniela</option>
+                    <option value="gabriela">Gabriela</option>
+                    <option value="fernanda">Fernanda</option>
+                    <option value="lurdes">Lurdes</option>
+                    <option value="gisela">Gisela</option>
+                </select>
+
+                <label>Telefone:</label>
+                <input type="tel" name="telefone" placeholder="(99) 99999-9999" required>
+
+                <label>Data:</label>
+                <input type="date" name="data" required>
+
+                <label>Horário:</label>
+                <input type="time" name="horario" required>
+
+                <div class="button-group">
+                    <input type="submit" value="Agendar">
+                    <input type="reset" value="Cancelar">
+                </div>
+            </form>
+            <div class="section-footer">
+                <a href="#" class="back-to-top">↑ Voltar ao Topo</a>
+            </div>
+        </section>
+
+        <section id="contato">
+            <h2>Contato</h2>
+            <div class="contato-info">
+                <p><strong>Telefone:</strong> (61) 99908-5645</p>
+                <p><strong>Email:</strong> contato@salaodebeleza.com.br</p>
+                <p><strong>Endereço:</strong> Brasília, DF</p>
+                <p><strong>Horário de Funcionamento:</strong> Segunda a Sábado, 9h às 19h</p>
+            </div>
+
+            <form style="margin-top: 40px;">
+                <label>Nome:</label>
+                <input type="text" name="nome" placeholder="Nome Completo" required>
+
+                <label>Email:</label>
+                <input type="email" name="email" placeholder="seu@email.com" required>
+
+                <label>Assunto:</label>
+                <textarea name="assunto" rows="5" placeholder="Digite sua mensagem aqui..." required></textarea>
+
+                <div class="button-group">
+                    <input type="submit" value="Enviar">
+                    <input type="reset" value="Limpar">
+                </div>
+            </form>
+            <div class="section-footer">
+                <a href="#" class="back-to-top">↑ Voltar ao Topo</a>
+            </div>
+        </section>
+
+        <section id="funcionarios">
+            <h2>Nossos Funcionários</h2>
+            <ul class="funcionarios__lista">
+                <li class="funcionarios__item">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300" alt="Maria">
+                    <h3>Maria</h3>
+                    <h4>Especialidade: Cabelo</h4>
+                    <h5>Tel: (61) 99908-5555</h5>
+                </li>
+                <li class="funcionarios__item">
+                    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=300" alt="Tatiana">
+                    <h3>Tatiana</h3>
+                    <h4>Especialidade: Manicure</h4>
+                    <h5>Tel: (61) 99908-5444</h5>
+                </li>
+                <li class="funcionarios__item">
+                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=300" alt="Andressa">
+                    <h3>Andressa</h3>
+                    <h4>Especialidade: Escovinha</h4>
+                    <h5>Tel: (61) 99908-5333</h5>
+                </li>
+                <li class="funcionarios__item">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300" alt="Daniela">
+                    <h3>Daniela</h3>
+                    <h4>Especialidade: Tintura</h4>
+                    <h5>Tel: (61) 99908-5222</h5>
+                </li>
+                <li class="funcionarios__item">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300" alt="Gabriela">
+                    <h3>Gabriela</h3>
+                    <h4>Especialidade: Corte</h4>
+                    <h5>Tel: (61) 99908-5111</h5>
+                </li>
+                <li class="funcionarios__item">
+                    <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=300" alt="Fernanda">
+                    <h3>Fernanda</h3>
+                    <h4>Especialidade: Blindagem</h4>
+                    <h5>Tel: (61) 99908-5000</h5>
+                </li>
+                <li class="funcionarios__item">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300" alt="Lurdes">
+                    <h3>Lurdes</h3>
+                    <h4>Especialidade: Realinhamento</h4>
+                    <h5>Tel: (61) 99908-5123</h5>
+                </li>
+                <li class="funcionarios__item">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300" alt="Gisela">
+                    <h3>Gisela</h3>
+                    <h4>Especialidade: Tratamento</h4>
+                    <h5>Tel: (61) 99908-5456</h5>
+                </li>
+            </ul>
+            <div class="section-footer">
+                <a href="#" class="back-to-top">↑ Voltar ao Topo</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Todos os direitos reservados | <b>Anderson & Olenice</b></p>
+    </footer>
+</body>
+</html>
